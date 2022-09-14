@@ -1,5 +1,10 @@
 sudo apt-get update
 
+sudo apt install build-essential
+
+echo 'Instalando Snap'
+sudo apt-get install snapd -y
+
 echo 'instalando curl' 
 sudo apt install curl -y
 
@@ -55,12 +60,7 @@ read path_user_flutter
 export PATH="$PATH:/home/"$path_user_flutter"/flutter/bin"
 
 echo 'instalando code(vscode)'
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt-get install apt-transport-https -y
-sudo apt-get update
-sudo apt-get install code -y # or code-insiders
+sudo snap install code --classic
 
 echo 'installing extensions'
 code --install-extension dbaeumer.vscode-eslint
@@ -75,15 +75,24 @@ code --install-extension yzhang.markdown-all-in-one
 code --install-extension WakaTime.vscode-wakatime
 
 
-echo 'installing spotify' 
-snap install spotify
 
-echo 'installing discord' 
-sudo snap install discord
+echo 'instalando spotify' 
+sudo snap install spotify -y
 
-echo 'instalando o Vivaldi'
-wget https://downloads.vivaldi.com/stable/vivaldi-stable_current_amd64.deb -O vivaldi.deb
-sudo dpkg -i vivaldi.deb
+echo 'instalando discord' 
+sudo snap install discord -y
+
+echo 'Instalando Slack' 
+sudo snap install slack -y
+
+
+echo 'instalando o Brave'
+sudo apt install apt-transport-https curl
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update
+sudo apt install brave-browser
+
 
 echo 'installing nvm' 
 sh -c "$(curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash)"
