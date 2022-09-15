@@ -5,7 +5,7 @@ sudo apt install build-essential
 echo 'Instalando Flatpak'
 sudo apt install flatpak -y
 sudo apt install gnome-software-plugin-flatpak -y
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo -y
 
 
 echo 'instalando curl' 
@@ -19,7 +19,7 @@ curl http://npmjs.org/install.sh | sudo sh
 npm - v
 
 echo 'instalando GitKraken'
-flatpak install flathub com.axosoft.GitKraken
+flatpak install flathub com.axosoft.GitKraken -y
 
 echo "Qual o nome você gostaria de usar no GIT user.name?"
 echo "Por exemplo, o meu será \"Fernando Martinho\""
@@ -93,7 +93,7 @@ sudo apt install apt-transport-https curl
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 sudo apt update
-sudo apt install brave-browser
+sudo apt install brave-browser -y
 
 
 echo 'installing nvm' 
