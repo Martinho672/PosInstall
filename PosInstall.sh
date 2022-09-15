@@ -2,8 +2,11 @@ sudo apt-get update
 
 sudo apt install build-essential
 
-echo 'Instalando Snap'
-sudo apt-get install snapd -y
+echo 'Instalando Flatpak'
+sudo apt install flatpak -y
+sudo apt install gnome-software-plugin-flatpak -y
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 
 echo 'instalando curl' 
 sudo apt install curl -y
@@ -16,8 +19,7 @@ curl http://npmjs.org/install.sh | sudo sh
 npm - v
 
 echo 'instalando GitKraken'
-wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
-sudo dpkg -i gitkraken-amd64.deb
+flatpak install flathub com.axosoft.GitKraken
 
 echo "Qual o nome você gostaria de usar no GIT user.name?"
 echo "Por exemplo, o meu será \"Fernando Martinho\""
@@ -60,7 +62,7 @@ read path_user_flutter
 export PATH="$PATH:/home/"$path_user_flutter"/flutter/bin"
 
 echo 'instalando code(vscode)'
-sudo snap install code --classic
+flatpak install flathub com.visualstudio.code -y
 
 echo 'installing extensions'
 code --install-extension dbaeumer.vscode-eslint
@@ -77,13 +79,13 @@ code --install-extension WakaTime.vscode-wakatime
 
 
 echo 'instalando spotify' 
-sudo snap install spotify -y
+flatpak install flathub com.spotify.Client -y
 
 echo 'instalando discord' 
-sudo snap install discord -y
+flatpak install flathub com.discordapp.Discord -y
 
 echo 'Instalando Slack' 
-sudo snap install slack -y
+flatpak install flathub com.slack.Slack -y
 
 
 echo 'instalando o Brave'
@@ -160,6 +162,7 @@ sudo apt install -y ./teamviewer_amd64.deb
 
 clear
 
-echo 'Parece que terminamos por aqui :) até a próxima'
+echo 'Parece que terminamos por aqui, seu computador será reiniciado ! :) até a próxima'
 echo $git_config_user_name
+shutdown -r 0
 
