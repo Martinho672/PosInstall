@@ -11,15 +11,32 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 echo 'instalando curl' 
 sudo apt install curl -y
 
-echo 'instalando git' 
-sudo apt install git -y
-
 echo 'Instalando npm'
 curl http://npmjs.org/install.sh | sudo sh
 npm - v
 
 echo 'instalando GitKraken'
 flatpak install flathub com.axosoft.GitKraken -y
+
+echo 'instalando spotify' 
+flatpak install flathub com.spotify.Client -y
+
+echo 'instalando discord' 
+flatpak install flathub com.discordapp.Discord -y
+
+echo 'Instalando Slack' 
+flatpak install flathub com.slack.Slack -y
+
+
+echo 'instalando o Brave'
+sudo apt install apt-transport-https curl
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update -y
+sudo apt install brave-browser -y
+
+echo 'instalando git' 
+sudo apt install git -y
 
 echo "Qual o nome você gostaria de usar no GIT user.name?"
 echo "Por exemplo, o meu será \"Fernando Martinho\""
@@ -39,19 +56,6 @@ ssh-keygen -t rsa -b 4096 -C $git_config_user_email
 ssh-add ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub | xclip -selection clipboard
 
-
-
-echo 'instalando zsh'
-sudo apt-get install zsh -y
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-chsh -s /bin/zsh
-
-echo 'instalando ferramenta para lidar com a area de transferencia via CLI'
-sudo apt-get install xclip -y
-
-export alias pbcopy='xclip -selection clipboard'
-export alias pbpaste='xclip -selection clipboard -o'
-source ~/.zshrc
 
 git clone https://github.com/flutter/flutter.git -b stable --depth 1
 export PATH="$PATH:`pwd`/flutter/bin"
@@ -78,22 +82,6 @@ code --install-extension WakaTime.vscode-wakatime
 
 
 
-echo 'instalando spotify' 
-flatpak install flathub com.spotify.Client -y
-
-echo 'instalando discord' 
-flatpak install flathub com.discordapp.Discord -y
-
-echo 'Instalando Slack' 
-flatpak install flathub com.slack.Slack -y
-
-
-echo 'instalando o Brave'
-sudo apt install apt-transport-https curl
-sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo apt update
-sudo apt install brave-browser -y
 
 
 echo 'installing nvm' 
@@ -107,6 +95,20 @@ git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+echo 'instalando zsh'
+sudo apt-get install zsh -y
+sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+chsh -s /bin/zsh
+
+echo 'instalando ferramenta para lidar com a area de transferencia via CLI'
+sudo apt-get install xclip -y
+
+
+export alias pbcopy='xclip -selection clipboard'
+export alias pbpaste='xclip -selection clipboard -o'
+source ~/.zshrc
+
 
 source ~/.zshrc
 nvm --version
