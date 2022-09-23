@@ -1,11 +1,11 @@
-sudo apt-get update
+sudo apt-get update -y
 
-sudo apt install build-essential
+sudo apt install build-essential -y
 
 echo 'Instalando Flatpak'
 sudo apt install flatpak -y
 sudo apt install gnome-software-plugin-flatpak -y
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo -y
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 
 echo 'instalando curl' 
@@ -27,13 +27,8 @@ flatpak install flathub com.discordapp.Discord -y
 echo 'Instalando Slack' 
 flatpak install flathub com.slack.Slack -y
 
-
-echo 'instalando o Brave'
-sudo apt install apt-transport-https curl
-sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo apt update -y
-sudo apt install brave-browser -y
+echo 'Instalando Brave' 
+flatpak install flathub com.brave.Browser -y
 
 echo 'instalando git' 
 sudo apt install git -y
@@ -82,8 +77,6 @@ code --install-extension WakaTime.vscode-wakatime
 
 
 
-
-
 echo 'installing nvm' 
 sh -c "$(curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash)"
 
@@ -123,43 +116,6 @@ echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
 source ~/.zshrc
 echo 'instalando Oh My Zsh'
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-echo 'instalando tema Dracula Zsh'
-git clone https://github.com/dracula/zsh.git
-ln -s $DRACULA_THEME/dracula.zsh-theme $OH_MY_ZSH/themes/dracula.zsh-theme
-
-echo 'installing Spaceship'
-git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
-ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-sed -i 's/.*ZSH_THEME=.*/ZSH_THEME="spaceship"/g' ~/.zshrc
-
-echo 'installing Spaceship plugins'
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
-echo 'SPACESHIP_PROMPT_ORDER=(
-  user          # Username section
-  dir           # Current directory section
-  host          # Hostname section
-  git           # Git section (git_branch + git_status)
-  hg            # Mercurial section (hg_branch  + hg_status)
-  exec_time     # Execution time
-  line_sep      # Line break
-  vi_mode       # Vi-mode indicator
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
-  char          # Prompt character
-)
-SPACESHIP_USER_SHOW=always
-SPACESHIP_PROMPT_ADD_NEWLINE=false
-SPACESHIP_CHAR_SYMBOL="❯"
-SPACESHIP_CHAR_SUFFIX=" "' >> ~/.zshrc
-
-echo 'zinit light zdharma/fast-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions' >> ~/.zshrc
-
-echo 'Instalando teamviewer'
-wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
-sudo apt install -y ./teamviewer_amd64.deb
 
 
 clear
