@@ -35,29 +35,29 @@ sudo apt install git -y
 
 echo "Qual o nome você gostaria de usar no GIT user.name?"
 echo "Por exemplo, o meu será \"Fernando Martinho\""
-read git_config_user_name
+read -r git_config_user_name
 git config --global user.name "$git_config_user_name"
 clear 
 
 echo "Qual e-mail você gostaria de utilizar no GIT user.email?"
 echo "Por exemplo, o meu será \"martinho672@gmail.com\""
-read git_config_user_email
-git config --global user.email $git_config_user_email
+read -r git_config_user_email
+git config --global user.email "$git_config_user_email"
 clear
 
 
 echo "Gerando uma chave SSH"
-ssh-keygen -t rsa -b 4096 -C $git_config_user_email
+ssh-keygen -t rsa -b 4096 -C "$git_config_user_email"
 ssh-add ~/.ssh/id_rsa
-cat ~/.ssh/id_rsa.pub | xclip -selection clipboard
+cmd ~/.ssh/id_rsa.pub | xclip -selection clipboard
 
 
 git clone https://github.com/flutter/flutter.git -b stable --depth 1
-export PATH="$PATH:`pwd`/flutter/bin"
+export PATH="$PATH: $(pwd)/flutter/bin"
 flutter precache
 echo "Qual seu usuário do sistema em que foi instalado o Flutter?"
 echo "vai ser utilizado para definir o PATH por exemplo  \"bondurant\"  ira gerar um caminho similar a \"/home/bondurant/flutter/bin \""
-read path_user_flutter
+read -r path_user_flutter
 export PATH="$PATH:/home/"$path_user_flutter"/flutter/bin"
 
 echo 'instalando code(vscode)'
@@ -121,6 +121,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 clear
 
 echo 'Parece que terminamos por aqui, seu computador será reiniciado ! :) até a próxima'
-echo $git_config_user_name
+echo "$git_config_user_name"
 shutdown -r 0
 
