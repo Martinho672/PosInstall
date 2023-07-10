@@ -7,6 +7,9 @@ sudo apt install flatpak -y
 sudo apt install gnome-software-plugin-flatpak -y
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
+echo 'Instalando Snapd'
+sudo apt install snapd -y
+
 
 echo 'instalando curl' 
 sudo apt install curl -y
@@ -52,9 +55,8 @@ ssh-add ~/.ssh/id_rsa
 cmd ~/.ssh/id_rsa.pub | xclip -selection clipboard
 
 
-git clone https://github.com/flutter/flutter.git -b stable --depth 1
-export PATH="$PATH: $(pwd)/flutter/bin"
-flutter precache
+sudo snap install flutter --classic
+flutter sdk-path
 echo "Qual seu usuário do sistema em que foi instalado o Flutter?"
 echo "vai ser utilizado para definir o PATH por exemplo  \"bondurant\"  ira gerar um caminho similar a \"/home/bondurant/flutter/bin \""
 read -r path_user_flutter
@@ -62,19 +64,6 @@ export PATH="$PATH:/home/"$path_user_flutter"/flutter/bin"
 
 echo 'instalando code(vscode)'
 flatpak install flathub com.visualstudio.code -y
-
-echo 'installing extensions'
-code --install-extension dbaeumer.vscode-eslint
-code --install-extension christian-kohler.path-intellisense
-code --install-extension dbaeumer.vscode-eslint
-code --install-extension dracula-theme.theme-dracula
-code --install-extension esbenp.prettier-vscode
-code --install-extension foxundermoon.shell-format
-code --install-extension pmneo.tsimporter
-code --install-extension waderyan.gitblame
-code --install-extension yzhang.markdown-all-in-one
-code --install-extension WakaTime.vscode-wakatime
-
 
 
 echo 'installing nvm' 
